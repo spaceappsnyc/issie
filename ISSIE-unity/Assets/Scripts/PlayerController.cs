@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour {
 	public bool flying;
 //	public Text countText = new Text();
 //	public Text winText = new Text();
-	public WebSocketController socket;
+	public ForceAdapter adaptor;
 
 	private Rigidbody rb;
 	private int count;
@@ -29,9 +29,12 @@ public class PlayerController : MonoBehaviour {
 		float jumpButton = Input.GetAxis ("Jump");
 		float xAccel = Input.acceleration.x;
 		float zAccel = Input.acceleration.z;
-		float humanPower = socket.getHumanPower ();
 
-		moveVertical = moveVertical + humanPower;
+        Debug.Log("Starting to get Human Power! ");
+        float humanPower = adaptor.getHumanPower();
+        Debug.Log("Got Human Power! " + humanPower.ToString());
+
+        moveVertical = moveVertical + humanPower;
 
 		if (rb.transform.position.y < 0.75f || flying) {
 			if (jumpButton != 0.0f) {
