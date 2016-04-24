@@ -37,7 +37,7 @@ public class WebSocketController : MonoBehaviour, WebSocketUnityDelegate {
 			_message = "";
 
 		}
-
+		Debug.Log ("made force" + force);
 		return force;
 	}
 

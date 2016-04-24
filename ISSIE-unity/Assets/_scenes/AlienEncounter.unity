@@ -6090,7 +6090,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11469182, guid: 2bec3fc0fdbd245cdb61743bb6264648, type: 2}
       propertyPath: address
-      value: 10.200.1.211:8001
+      value: localhost:8001
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2bec3fc0fdbd245cdb61743bb6264648, type: 2}
@@ -7957,6 +7957,8 @@ MonoBehaviour:
   m_AirBrakesEffect: 3
   m_ThrottleChangeSpeed: 0.3
   m_DragIncreaseFactor: 0.001
+  HumanPower: 0
+  ForceAdaptor: {fileID: 833461244}
 --- !u!54 &727222709
 Rigidbody:
   m_ObjectHideFlags: 0

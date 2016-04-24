@@ -23,9 +23,14 @@ public class ForceAdapter : MonoBehaviour
 
     public float getHumanPower()
     {
-        print("\nGot here!!");
+		Debug.Log ("\nGot here!!");
 
         //socket is initialized in the websocketcontroller onGUI() load the first time
+		if (socket == null) {
+			Debug.Log ("\nNo connection, no power!");
+			return (float)0.0;
+		}
+
         float power = getRawPower(); //this is raw human power
 
         //this should only return when it gets both steps not just one.

@@ -21,11 +21,14 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
         [SerializeField] private float m_ThrottleChangeSpeed = 0.3f;  // The speed with which the throttle changes.
         [SerializeField] private float m_DragIncreaseFactor = 0.001f; // how much drag should increase with speed.
 
+		public float HumanPower = 0;
+		public ForceAdapter ForceAdaptor;
+
         public float Altitude { get; private set; }                     // The aeroplane's height above the ground.
         public float Throttle { get; private set; }                     // The amount of throttle being used.
         public bool AirBrakes { get; private set; }                     // Whether or not the air brakes are being applied.
         public float ForwardSpeed { get; private set; }                 // How fast the aeroplane is traveling in it's forward direction.
-        public float EnginePower { get; private set; }                  // How much power the engine is being given.
+		public float EnginePower { get; private set; }                  // How much power the engine is being given.
         public float MaxEnginePower{ get { return m_MaxEnginePower; }}    // The maximum output of the engine.
         public float RollAngle { get; private set; }
         public float PitchAngle { get; private set; }
@@ -68,6 +71,9 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
             YawInput = yawInput;
             ThrottleInput = throttleInput;
             AirBrakes = airBrakes;
+
+			HumanPower = ForceAdaptor.getHumanPower();
+			Debug.Log ("got human power of " + HumanPower);
 
             ClampInputs();
 
