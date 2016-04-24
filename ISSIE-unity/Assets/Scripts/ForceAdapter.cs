@@ -5,8 +5,8 @@
 public class ForceAdapter : MonoBehaviour
 {
     public WebSocketController socket;
-    private const int NUM_STEPS_TO_HYPERDRIVE = 50;
-    private const int HYPERDRIVE_FACTOR = 10;
+    private const int NUM_STEPS_TO_HYPERDRIVE = 500;
+    private const int HYPERDRIVE_FACTOR = 100;
     private bool wasNeg = true;
     private int numSteps = 0;
 
@@ -56,6 +56,8 @@ public class ForceAdapter : MonoBehaviour
         //hardcode for now
         if (numSteps > NUM_STEPS_TO_HYPERDRIVE)
         {
+            //reset number of steps
+            Debug.Log("Reset number of steps to 0");
             numSteps = 0;
             return force * HYPERDRIVE_FACTOR;
         }
