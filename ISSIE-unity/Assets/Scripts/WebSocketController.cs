@@ -11,7 +11,7 @@ public class WebSocketController : MonoBehaviour, WebSocketUnityDelegate {
 	private string _message = "";
 	public int force = 0;
 	public string address = "issie.local:8001";
-	
+
 	// Web Socket for Unity
 	//    Desktop
 	//    WebPlayer
@@ -152,7 +152,8 @@ public class WebSocketController : MonoBehaviour, WebSocketUnityDelegate {
 		sendingMessage = false;
 		receivedMessage = true;
 		_message = message;
-	}
+        Debug.Log("Finished receiving : " + message);
+    }
 	
 	// This event happens when the websocket received data (on mobile : ios and android)
 	// you need to decode it and call after the same callback than PC
