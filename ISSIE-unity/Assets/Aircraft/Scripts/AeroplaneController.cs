@@ -73,7 +73,7 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
             AirBrakes = airBrakes;
 
 			HumanPower = ForceAdaptor.getHumanPower();
-			Debug.Log ("got human power of " + HumanPower);
+			Debug.Log ("AirplaneController got human power of " + HumanPower);
 
             ClampInputs();
 
@@ -158,17 +158,25 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
 
         private void ControlThrottle()
         {
+            m_ThrottleChangeSpeed = (float)((HumanPower / (float)10.0)) * 300f;
+
             // override throttle if immobilized
             if (m_Immobilized)
             {
                 ThrottleInput = -0.5f;
             }
 
+            Debug.Log("Throttle Change Speed is " + m_ThrottleChangeSpeed.ToString());
+
             // Adjust throttle based on throttle input (or immobilized state)
             Throttle = Mathf.Clamp01(Throttle + ThrottleInput*Time.deltaTime*m_ThrottleChangeSpeed);
 
+            Debug.Log("Throttle is " + Throttle.ToString());
+
             // current engine power is just:
             EnginePower = Throttle*m_MaxEnginePower;
+
+            Debug.Log("Engine Power is " + EnginePower.ToString());
         }
 
 
