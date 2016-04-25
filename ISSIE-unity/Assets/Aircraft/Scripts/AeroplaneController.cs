@@ -279,5 +279,47 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
         {
             m_Immobilized = false;
         }
+
+
+		/// <summary>
+		/// Capture event handling
+		/// </summary>
+
+		bool cap = false;
+		private string ste = "You got Evie!";
+		public UnityEngine.UI.RawImage trump;
+		public UnityEngine.UI.RawImage trump2;
+		public UnityEngine.UI.RawImage foxie;
+		public UnityEngine.UI.RawImage foxie2;
+		public Texture myFirstImage;
+
+		void OnTriggerEnter(Collider other)
+		{
+			if (other.gameObject.CompareTag("Pick Up"))
+			{
+				other.gameObject.SetActive(false);
+				cap = true;
+				trump.texture = myFirstImage;
+				trump2.texture = myFirstImage;
+			}
+			if (other.gameObject.CompareTag("Pick Up2"))
+			{
+				other.gameObject.SetActive(false);
+				cap = true;
+				foxie.texture = myFirstImage;
+				foxie2.texture = myFirstImage;
+			}
+		}
+
+		void OnGUI()
+		{
+			GUIStyle myStyle = new GUIStyle();
+			myStyle.fontSize = 50;
+
+			if (cap)
+			{
+				ste = GUI.TextArea(new Rect(500, 200, 200, 100), ste, myStyle);
+			}
+		}
     }
 }
