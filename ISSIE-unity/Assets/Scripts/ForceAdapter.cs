@@ -5,8 +5,8 @@
 public class ForceAdapter : MonoBehaviour
 {
     public WebSocketController socket;
-    private const int NUM_STEPS_TO_HYPERDRIVE = 50;
-    private const int HYPERDRIVE_FACTOR = 10;
+    private const int NUM_STEPS_TO_HYPERDRIVE = 500;
+    private const int HYPERDRIVE_FACTOR = 100;
     private bool wasNeg = true;
     private int numSteps = 0;
 
