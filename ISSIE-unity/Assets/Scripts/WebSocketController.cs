@@ -30,23 +30,36 @@ public class WebSocketController : MonoBehaviour, WebSocketUnityDelegate {
 
 	}
 
-	public int getHumanPower() {
-		int force = 0;
-
-		if (_message != "") {
-			if (_message == "right") {
-				force = 10;
-			} else {
-				force = -10;
-			}
-
-			_message = "";
-
-		}
-
-		return force;
-	}
-
+	public enum DIRECTION { UP, DOWN, LEFT, RIGHT, NONE, };
+ 	public class PowerSignal
+ 	{
+	 	private int m_force;
+ 		private DIRECTION m_direction;
+ 		public PowerSignal(int force, DIRECTION direction)
+ 		{
+ 			m_force = force;
+	 		m_direction = direction;
+ 		}
+ 		public int getForce() { return m_force; }
+ 		public DIRECTION getDirection() { return m_direction; }
+ 	}
+  		  
+ 	public PowerSignal getHumanPower() {
+ 		PowerSignal signal = new PowerSignal(0, DIRECTION.NONE);
+  		  
+  		if (_message != "") {
+			switch( _message)
+	 		{
+ 				case "right": signal = new PowerSignal(1, DIRECTION.RIGHT); break;
+ 				case "left": signal = new PowerSignal(-1, DIRECTION.LEFT); break;
+	 			case "up": signal = new PowerSignal(1, DIRECTION.UP); break;
+ 				case "down": signal = new PowerSignal(-1, DIRECTION.DOWN); break;
+ 				default: break;
+ 			}
+ 			_message = "";
+  		}
+	 	return signal;
+  	}
 
 	void OnGUI(){
 		
