@@ -16,7 +16,7 @@ public class ForceAdapter : MonoBehaviour
         //init socket here
     }
 
-    private float getRawPower()
+    private WebSocketController.PowerSignal getRawPower()
     {
         return socket.getHumanPower();
     }
@@ -31,23 +31,24 @@ public class ForceAdapter : MonoBehaviour
 			return (float)0.0;
 		}
 
-        float power = getRawPower(); //this is raw human power
+        WebSocketController.PowerSignal signal = getRawPower(); //this is raw human power
 
         //this should only return when it gets both steps not just one.
-        if ((power < 0 && !wasNeg) || (power > 0 && wasNeg))
+        if ((signal.getForce() < 0 && !wasNeg) || (signal.getForce() > 0 && wasNeg))
         {
             wasNeg = !wasNeg;
-            power = getForceFactoredByExerciseType(power);
+            float power = getForceFactoredByExerciseType(signal.getForce(), signal.getDirection());
             power = getForceFactoredByNumSteps(power, numSteps);
             numSteps++;
             return power;
         }
         return (float)0.0;
     }
-    public float getForceFactoredByExerciseType(float force)
+    public float getForceFactoredByExerciseType(float force, WebSocketController.DIRECTION direction)
     {
         //hardcode for now
-        float multiplier = (float)1.0;
+        float multiplier = (direction == WebSocketController.DIRECTION.UP 
+             || direction == WebSocketController.DIRECTION.DOWN) ? 2.0f : 1.0f;
         /*
          * All the logic to determine exercise types goes here
          * For example, if using an exercise bike, we may need multiplier = 5.0 (assume)
